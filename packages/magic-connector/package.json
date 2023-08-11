@@ -1,0 +1,46 @@
+{
+  "name": "@0xpass/magic-connector",
+  "version": "0.0.1",
+  "main": "dist/index",
+  "types": "dist/index",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "pnpm run clean && pnpm run compile",
+    "clean": "rimraf ./dist",
+    "compile": "tsc -p tsconfig.json",
+    "prepublishOnly": "pnpm run build",
+    "test": "vitest",
+    "test:run": "vitest run"
+  },
+  "peerDependencies": {
+    "@wagmi/core": "^1.3.8",
+    "viem" : "^1.5.4",
+    "wagmi": "^1.3.9"
+  },
+  "dependencies": {
+    "@magic-ext/oauth": "^11.1.4",
+    "@magic-sdk/provider": "^17.1.3",
+    "@magic-sdk/types": "^15.1.3",
+    "magic-sdk": "^17.1.4",
+    "@wagmi/core": "^1.3.8",
+    "viem" : "^1.5.4"
+  },
+  "devDependencies": {
+    "eslint-config-custom": "workspace:*",
+    "tsconfig": "workspace:*",
+    "@types/node": "~18.16.0",
+    "@wagmi/core": "^1.3.8",
+    "eslint": "^7.32.0",
+    "rimraf": "~5.0.0",
+    "typescript": "^5.0.4",
+    "vitest": "^0.31.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
