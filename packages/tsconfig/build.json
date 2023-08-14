@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Packages",
+  "extends": "./base.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ES2019",
+    "moduleResolution": "node",
+    "jsx": "react-jsx"
+  }
+}

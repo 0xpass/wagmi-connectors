@@ -1,11 +1,12 @@
 {
   "name": "@0xpass/magic-connector",
-  "version": "0.0.1",
-  "main": "dist/index",
-  "types": "dist/index",
+  "version": "0.0.3",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
+  "type": "module",
   "exports": {
     ".": "./dist/index.js"
   },
@@ -38,7 +39,10 @@
     "eslint": "^7.32.0",
     "rimraf": "~5.0.0",
     "typescript": "^5.0.4",
-    "vitest": "^0.31.0"
+    "vitest": "^0.31.0",
+    "@rollup/plugin-typescript": "^11.1.0",
+    "rollup": "^3.21.3",
+    "rollup-plugin-peer-deps-external": "^2.2.4"
   },
   "publishConfig": {
     "access": "public"
