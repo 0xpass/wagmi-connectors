@@ -15,7 +15,13 @@
     "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
     "prettier": "^2.5.1",
-    "turbo": "latest"
+    "turbo": "latest",
+    "rollup": "^3.21.3",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.34.1",
+    "rollup-plugin-visualizer": "^5.5.4",
+    "tslib": "^2.3.0"
   },
   "packageManager": "pnpm@8.6.10",
   "name": "wagmi-connectors"
