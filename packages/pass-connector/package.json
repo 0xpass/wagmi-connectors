@@ -1,0 +1,48 @@
+{
+  "name": "@0xpass/pass-connector",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "pnpm run clean && pnpm run compile",
+    "clean": "rimraf ./dist",
+    "compile": "rollup --config rollup.config.js",
+    "prepublishOnly": "pnpm run build",
+    "test": "vitest",
+    "test:run": "vitest run"
+  },
+  "peerDependencies": {
+    "@wagmi/core": "^1.3.8",
+    "viem" : "^1.5.4",
+    "wagmi": "^1.3.9"
+  },
+  "dependencies": {
+    "@wagmi/core": "^1.3.8",
+    "viem" : "^1.5.4",
+    "@0xpass/passport": "0.0.5",
+    "@0xpass/passport-viem": "^0.0.2"
+  },
+  "devDependencies": {
+    "eslint-config-custom": "workspace:*",
+    "tsconfig": "workspace:*",
+    "@types/node": "~18.16.0",
+    "@wagmi/core": "^1.3.8",
+    "eslint": "^7.32.0",
+    "rimraf": "~5.0.0",
+    "typescript": "^5.0.4",
+    "vitest": "^0.31.0",
+    "@rollup/plugin-typescript": "^11.1.0",
+    "rollup": "^3.21.3",
+    "rollup-plugin-peer-deps-external": "^2.2.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
