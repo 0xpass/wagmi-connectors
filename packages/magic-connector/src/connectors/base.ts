@@ -2,7 +2,7 @@ import type {OAuthExtension} from "@magic-ext/oauth";
 import type {InstanceWithExtensions, MagicSDKExtensionsOption, SDKBase,} from "@magic-sdk/provider";
 import {Chain, Connector, getConfig} from "@wagmi/core";
 import {createWalletClient, custom, getAddress} from "viem";
-import {normalizeChainId} from "../utils/normalize-chain-id";
+import {normalizeChainId} from "@0xpass/wagmi-commons";
 
 const IS_SERVER = typeof window === "undefined";
 

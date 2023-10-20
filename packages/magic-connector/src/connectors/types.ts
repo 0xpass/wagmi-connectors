@@ -1,7 +1,6 @@
 import { Chain } from "@wagmi/core";
+import {ConnectorOptions} from "@0xpass/wagmi-commons";
 
-export interface MagicWalletConnectorOptions {
-  apiKey: string;
+export interface MagicWalletConnectorOptions extends ConnectorOptions{
   chains: Chain[];
-  shimDisconnect?: boolean;
 }

@@ -1,56 +1,30 @@
-import {MagicWalletConnectorOptions} from "../connectors/types";
-import {Wallet} from "../types";
-import {logos} from "../utils/logos";
-import {MagicSocialConnector} from "../connectors/social";
+import {PassConnector, PassOptions, PassProvider, supportedProviders} from "../connectors/base";
+import {Chain} from "@wagmi/core";
+import {ConnectorOptions, logos, Wallet} from "@0xpass/wagmi-commons";
 
 
-const supportedProviders = [
-  "apple",
-  "bitbucket",
-  "discord",
-  "facebook",
-  "github",
-  "gitlab",
-  "google",
-  "linkedin",
-  "microsoft",
-  "twitch",
-  "twitter",
-] as const;
 
-export interface SocialMagicWalletConnectorOptions
-  extends MagicWalletConnectorOptions {
-  provider: typeof supportedProviders[number];
+export interface SocialPassportWalletOptions extends ConnectorOptions, PassOptions {
+  chains: Chain[],
 }
 
-export const socialMagicWallet = ({
-  chains,
-  apiKey,
-  provider,
-  shimDisconnect = false,
-}: SocialMagicWalletConnectorOptions): Wallet => {
+
+export const socialPassWallet = (options: SocialPassportWalletOptions): Wallet => {
   return {
-    id: `${provider}_magic`,
-    name: provider.charAt(0).toUpperCase() + provider.slice(1),
+    id: `${options.verifier}_passport`,
+    name: options.verifier.charAt(0).toUpperCase() + options.verifier.slice(1),
     format: "button",
     iconBackground: "#fff",
-    iconUrl: logos[provider],
+    iconUrl: logos[options.verifier],
     createConnector: () => {
-      const connector = new MagicSocialConnector({
-        chains: chains,
+      const connector = new PassConnector({
+        chains: options.chains,
         options: {
-          chain: chains[0],
-          oauthOptions: {
-            provider: provider,
-          },
-          apiKey: apiKey,
-          magicSdkConfiguration: {
-            network: {
-              chainId: chains[0]?.id,
-              rpcUrl: chains[0].rpcUrls.default.http[0],
-            },
-          },
-          shimDisconnect,
+          clientId: options.clientId,
+          scope: options.scope,
+          provider: options.provider,
+          verifier: options.verifier,
+          loginFn: options.loginFn
         },
       });
       return {

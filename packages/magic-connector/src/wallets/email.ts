@@ -1,6 +1,7 @@
 import {MagicAuthConnector} from "../connectors/auth";
-import {Wallet} from "../types";
 import {MagicWalletConnectorOptions} from "../connectors/types";
+import {Wallet} from "@0xpass/wagmi-commons";
+
 
 export const emailMagicWallet = ({
   chains,

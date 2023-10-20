@@ -1,7 +1,6 @@
 import {MagicWalletConnectorOptions} from "../connectors/types";
-import {Wallet} from "../types";
-import {logos} from "../utils/logos";
 import {MagicSocialConnector} from "../connectors/social";
+import {logos, Wallet} from "@0xpass/wagmi-commons";
 
 
 const supportedProviders = [
