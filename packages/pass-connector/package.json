@@ -26,14 +26,15 @@
   "dependencies": {
     "@0xpass/passport": "^0.0.7",
     "@0xpass/passport-viem": "^0.0.4",
-    "@0xpass/wagmi-commons": "workspace:*"
+    "@0xpass/wagmi-commons": "workspace:*",
+    "wagmi": "^1.4.5",
+    "@wagmi/core": "^1.4.5",
+    "viem" : "^1.17.1"
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
     "@types/node": "~18.16.0",
-    "@wagmi/core": "^1.4.5",
-    "viem" : "^1.17.1",
     "eslint": "^7.32.0",
     "rimraf": "~5.0.0",
     "typescript": "^5.0.4",
