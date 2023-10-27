@@ -3,7 +3,6 @@
   import {Passport} from "@0xpass/passport";
   import {createPassportClient, createPassTransport} from "@0xpass/passport-viem";
   import {Address} from "wagmi";
-  import {normalizeChainId} from "@0xpass/wagmi-commons";
 
 
   export const supportedProviders = [
