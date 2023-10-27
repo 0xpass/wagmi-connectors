@@ -28,7 +28,8 @@
     scope: string;
     provider: PassProvider;
     verifier: typeof supportedProviders[number];
-    loginFn: () => Promise<string>;
+    loginFn: () => Promise<any>;
+    storage: any
   }
 
   export class PassConnector extends Connector<PassProvider,PassOptions> {
@@ -40,6 +41,7 @@
     protected passport = new Passport()
     protected sessionSig: undefined | string;
     protected provider: undefined | any;
+
     constructor(config: { chains?: Chain[]; options: PassOptions }) {
       super(config);
     }
@@ -50,9 +52,22 @@
 
       if (!(this.sessionSig)) throw new Error("User not logged in");
 
+      const chain = this.getInitialChain(config);
+      const transport = createPassTransport(this.sessionSig, chain, this.options.provider);
+      this.provider = transport({chain});
+      return this.provider
+    }
+
+    getInitialChain(config?: { chainId?: number }): Chain {
       const chain = config?.chainId ? this.chains.find(chain => chain.id === config.chainId) : undefined;
-      this.provider = createPassTransport(this.sessionSig, chain || this.chains[0], this.options.provider);
-      return this.provider;
+      return chain || this.chains[0]
+    }
+
+    async getPassport(config?: { chainId?: number }): Promise<any> {
+      const passClient = createPassportClient(
+          this.sessionSig,this.options.provider,this.getInitialChain(config),await this.getAccount()
+      )
+      return passClient
     }
 
     async isAuthorized(): Promise<boolean> {
@@ -60,26 +75,30 @@
     }
 
     async getChainId() {
-      const provider = await this.getProvider()
-      if (!provider) throw new ConnectorNotFoundError()
-      return provider.request({ method: 'eth_chainId' }).then(normalizeChainId)
+      const publicClient = await this.getPassport()
+      if (!publicClient) throw new ConnectorNotFoundError()
+      console.log("public client is ")
+      console.log(publicClient)
+      return publicClient.getChainId();
     }
 
     async connect(): Promise<Required<ConnectorData>> {
       this.emit("message", { type: "connecting" });
 
-      if (await this.isAuthorized()) {
-        const ouathToken = await this.options.loginFn();
 
+      this.sessionSig = this.options.storage?.getItem("session") || undefined;
+      console.log(this.sessionSig)
+
+      if (! await this.isAuthorized()) {
+        const ouathToken = await this.options.loginFn()
         const session = await this.passport.getSession({
           scope_id: this.options.scope,
           verifier_type: this.options.verifier,
           code: ouathToken,
         });
-        this.sessionSig = session.result.session_signature;
-        getConfig().storage?.setItem("session",this.sessionSig);
-      } else {
-        this.sessionSig = getConfig().storage?.getItem("session") || "";
+        this.sessionSig = JSON.stringify(session.result);
+        this.options.storage?.setItem("session", this.sessionSig)
+        // getConfig().storage?.setItem("session",this.sessionSig);
       }
       // if (provider?.on) {
       //   provider.on("accountsChanged", this.onAccountsChanged);
@@ -100,7 +119,7 @@
     async getAccount() {
       const provider = await this.getProvider();
       const accounts = await provider?.request({
-        method: "eth_accounts",
+        method: "eth_requestAccounts",
       });
       return getAddress(accounts[0] as string);
     }
@@ -109,16 +128,16 @@
       if(!this.sessionSig) {
         throw new Error("Session not found");
       }
-      const provider = await this.getProvider();
       const chain = this.chains.find((x) => x.id === chainId) || await this.getChainId();
-      createPassportClient(this.sessionSig,provider,chain)
+      return this.getPassport({chainId})
     }
 
 
     async disconnect(): Promise<void> {
       try {
         this.provider = undefined;
-        getConfig().storage?.removeItem("session")
+        this.options.storage?.removeItem("session")
+        // getConfig().storage?.removeItem("session")
         this.sessionSig = undefined;
         this.emit("disconnect");
 

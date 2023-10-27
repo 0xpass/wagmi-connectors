@@ -1,0 +1,20 @@
+{
+  "name": "@0xpass/jest-config",
+  "version": "0.0.1",
+  "description": "Passport Protocol Jest Config",
+  "keywords": [
+    "0xpass",
+    "jest",
+    "config"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0xpass/monorepo.git",
+    "directory": "packages/config/jest"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@0xpass/eslint-config": "workspace:*",
+    "@types/node": "^17.0.34"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "@0xpass/prettier-config",
+  "version": "0.0.1",
+  "description": "Passport Protocol Prettier Config",
+  "keywords": [
+    "0xpass",
+    "config",
+    "prettier"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0xpass/monorepo.git",
+    "directory": "packages/config/prettier"
+  },
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "source": "src/index.ts",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+    "postinstall": "pnpm build"
+  },
+  "jest": {
+    "preset": "@0xpass/jest-config/node"
+  },
+  "devDependencies": {
+    "@0xpass/typescript-config": "workspace:*",
+    "@types/prettier": "2.7.1",
+    "prettier": "2.8.1",
+    "prettier-plugin-solidity": "1.0.0",
+    "tsup": "6.5.0",
+    "typescript": "^5.0.4"
+  },
+  "peerDependencies": {
+    "prettier": "2.8.1"
+  }
+}

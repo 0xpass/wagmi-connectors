@@ -1,7 +1,13 @@
 {
   "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*",
+    "config/*"
+  ],
   "scripts": {
     "build": "turbo run build",
+    "refresh": "pnpm clean && pnpm install && pnpm build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
@@ -9,6 +15,8 @@
     "clean:node_modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
     "clean:dist": "find . -name 'dist' -type d -prune -exec rm -rf '{}' +",
     "clean:turbo": "find . -name '.turbo' -type d -prune -exec rm -rf '{}' +"
+  },
+  "dependencies": {
   },
   "devDependencies": {
     "@turbo/gen": "^1.9.7",
@@ -24,5 +32,7 @@
     "tslib": "^2.3.0"
   },
   "packageManager": "pnpm@8.6.10",
-  "name": "wagmi-connectors"
+  "name": "wagmi-connectors",
+  "repository": "0xpass/wagmi-connectors"
+
 }
