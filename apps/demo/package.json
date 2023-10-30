@@ -10,11 +10,10 @@
   },
   "dependencies": {
     "@0xpass/pass-connector": "workspace:*",
-    "@react-oauth/google": "^0.11.1",
+    "@0xpass/oauth": "0.0.1",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "axios": "latest",
     "viem": "^1.17.1",
     "wagmi": "^1.4.5",
     "@wagmi/core": "^1.4.5"

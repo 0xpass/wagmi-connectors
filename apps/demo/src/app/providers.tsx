@@ -1,14 +1,11 @@
 "use client";
-import { GoogleOAuthProvider } from "@react-oauth/google";
+import {GoogleOauth} from "@0xpass/oauth";
 
 export function Providers({ children }: { children: JSX.Element }) {
   return (
-    <GoogleOAuthProvider
-      clientId={
-        "878158413281-7crfata4i7j1qvn3hesqa7qeqa48eavd.apps.googleusercontent.com"
-      }
+    <GoogleOauth
     >
       {children}
-    </GoogleOAuthProvider>
+    </GoogleOauth>
   );
 }

@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import {Connector, useAccount, useConnect} from "wagmi";
-import {fetchBalance, sendTransaction, signMessage} from '@wagmi/core'
+import {Connector, useAccount, useConnect, useNetwork} from "wagmi";
+import {fetchBalance, getNetwork, sendTransaction, signMessage, switchNetwork} from '@wagmi/core'
 import {parseEther} from "viem";
+import {goerli, polygonMumbai} from "viem/chains";
 
 interface WagmiProps {
     connector: Connector;
@@ -14,6 +15,8 @@ function Wagmi({ connector }: WagmiProps) {
         connector: connector,
     });
     const { address, isConnected } = useAccount();
+    const { chain } = useNetwork()
+
 
 
 
@@ -34,6 +37,11 @@ function Wagmi({ connector }: WagmiProps) {
                 address: address!,
             })
             setOutput(`${balance.formatted}`)
+        } else if (ops === "switchChain") {
+            const network = await switchNetwork({
+                chainId: polygonMumbai.id,
+            })
+            setOutput("Changed to: " + (getNetwork())?.chain?.name)
         }
     }
     return (
@@ -41,6 +49,8 @@ function Wagmi({ connector }: WagmiProps) {
             <div className="bg-white p-8 rounded shadow-md">
                 <p className="text-xl font-bold mb-4">Welcome Mortal! You will be called by this hash:</p>
                 <p className="text-lg text-gray-600 mb-6">{address}</p>
+                <br/>
+                <p>Connected to {chain?.name}</p>
 
                 <p className="text-xl font-bold mb-4">Choose among these options:</p>
                 <button
@@ -60,6 +70,12 @@ function Wagmi({ connector }: WagmiProps) {
                     className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
                 >
                     Submit Dummy Transaction
+                </button>
+                <button
+                    onClick={() => handleOutput("switchChain")}
+                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                >
+                    Switch Chain
                 </button>
 
                 <div className="mt-6">
