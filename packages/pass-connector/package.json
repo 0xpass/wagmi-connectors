@@ -1,6 +1,6 @@
 {
   "name": "@0xpass/pass-connector",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -20,7 +20,7 @@
   },
   "peerDependencies": {
     "@wagmi/core": "^1.4.5",
-    "viem" : "^1.7.1",
+    "viem": "^1.7.1",
     "wagmi": "^1.4.5"
   },
   "dependencies": {
@@ -29,7 +29,7 @@
     "@0xpass/wagmi-commons": "workspace:*",
     "wagmi": "^1.4.5",
     "@wagmi/core": "^1.4.5",
-    "viem" : "^1.17.1",
+    "viem": "^1.17.1",
     "ethers": "^6.8.0"
   },
   "devDependencies": {
