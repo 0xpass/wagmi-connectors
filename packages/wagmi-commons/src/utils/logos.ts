@@ -1,4 +1,4 @@
-const googleLogo = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2048px-Google_%22G%22_Logo.svg.png"
+const googleLogo = "https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-512.png"
 
 const twitchLogo = "https://cdn4.iconfinder.com/data/icons/logos-brands-7/512/twitch-1024.png"
 
